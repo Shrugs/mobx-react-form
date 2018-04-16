@@ -1,4 +1,4 @@
-import { useStrict, configure } from 'mobx';
+import { configure } from 'mobx';
 
 import Form, { prototypes as formPrototypes } from './Form';
 import Field, { prototypes as fieldPrototypes } from './Field';
@@ -19,11 +19,7 @@ const { TEST } = process.env;
   change any state outside of an action
 */
 if (TEST) {
-  if (configure) {
-    configure({ enforceActions: true });
-  } else {
-    useStrict(true);
-  }
+  configure({ enforceActions: true });
 }
 
 /**
