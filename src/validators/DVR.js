@@ -34,6 +34,7 @@ export default class DVR {
     this.options = options;
     this.promises = promises;
     this.extend = plugin.extend;
+    this.extendInstance = plugin.extendInstance;
     this.validator = plugin.package || plugin;
   }
 
@@ -42,8 +43,15 @@ export default class DVR {
     _.extend(this.validator, {
       registerAsyncRule: (key, callback) => this.registerAsyncRule(key, callback),
     });
+
     // extend using "extend" callback
     if (_.isFunction(this.extend)) this.extend(this.validator);
+  }
+
+  extendValidatorInstance(instance) {
+    if (_.isFunction(this.extendInstance)) {
+      this.extendInstance(instance);
+    }
   }
 
   validateField(field, form) {
@@ -65,6 +73,8 @@ export default class DVR {
     const validation = new Validator(data, rules);
     // set label into errors messages instead key
     validation.setAttributeNames({ [field.path]: field.label });
+    // re-extend validator instance
+    this.extendValidatorInstance(validation);
     // check validation
     if (validation.passes()) return;
     // the validation is failed, set the field errorbre
