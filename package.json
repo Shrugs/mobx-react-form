@@ -1,5 +1,5 @@
 {
-  "name": "@shrugs/mobx-react-form",
+  "name": "mobx-react-form",
   "license": "MIT",
   "version": "0.0.0-semantically-released",
   "author": "Claudio Savino <claudio.savino@me.com> (https://twitter.com/foxhound87)",
@@ -16,7 +16,6 @@
     "build:umd": "webpack --output-filename mobx-react-form.umd.js",
     "build:umdmin": "webpack --output-filename mobx-react-form.umd.min.js -p",
     "prebuild": "npm run clean:build",
-    "precommit": "npm run lint && npm run cover",
     "commit": "git-cz && git push origin",
     "watch:build": "babel --watch -d lib/ src/",
     "watch:test": "npm run test -- -w",
